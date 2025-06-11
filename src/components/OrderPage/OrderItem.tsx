@@ -1,91 +1,63 @@
 import type { Item } from "../../types/item";
-import styled from "styled-components";
 import cart from "../../assets/cart.png";
+import plus from "../../assets/plus.png";
+import minus from "../../assets/minus.png";
 
-const Container = styled.div`
-  display: flex;
-  padding: 1rem;
-  padding-top: 0;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2rem;
-  @media (max-width: 1024px) {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-`;
+import { useState } from "react";
 
-const ImageContainer = styled.div`
-  max-width: 250px;
-  aspect-ratio: 1;
-  border-radius: 4px;
-  @media (max-width: 1024px) {
-    max-width: 150px;
-  }
-  position: relative;
-`;
-
-const ItemImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures image fills while preserving aspect */
-  display: block;
-`;
-
-const ItemDescription = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  justify-content: flex-start;
-  height: 3rem;
-  font-weight: 600;
-  @media (max-width: 1024px) {
-    height: auto;
-  }
-`;
-
-const AddToCartButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 2.5rem;
-  width: 10rem;
-  border-radius: 1.5rem;
-  background: #fdfdfc;
-  border: 1px solid #b8a1a2;
-  gap: 0.5rem;
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  transform: translate(-50%, -50%);
-  @media (max-width: 1024px) {
-    width: 4rem;
-    span {
-      display: none;
-    }
-  }
-`;
-
-const ButtonIcon = styled.img`
-  width: 1rem;
-  height: 1rem;
-`;
+import {
+  Container,
+  ImageContainer,
+  ItemImage,
+  AddToCartButton,
+  ButtonIcon,
+  QuantityCounterButton,
+  ItemDescription,
+} from "./OrderItem.styles";
 
 const OrderItem = (props: { item: Item }) => {
   const { item } = props;
+  const [itemCount, setItemCount] = useState<number>(0);
   return (
     <Container>
-      <ImageContainer>
+      <ImageContainer active={itemCount > 0}>
         <picture>
           <source media="(min-width: 1024px)" srcSet={item.image.tablet} />
           <source media="(min-width: 650px)" srcSet={item.image.tablet} />
           <ItemImage src={item.image.mobile}></ItemImage>
         </picture>
-        <AddToCartButton>
-          <ButtonIcon src={cart}></ButtonIcon>
-          <span>Add to cart</span>
-        </AddToCartButton>
+        {itemCount === 0 ? (
+          <AddToCartButton
+            onClick={() => {
+              setItemCount((prevCount) => {
+                return ++prevCount;
+              });
+            }}
+          >
+            <ButtonIcon src={cart}></ButtonIcon>
+            <span>Add to cart</span>
+          </AddToCartButton>
+        ) : (
+          <QuantityCounterButton>
+            <ButtonIcon
+              src={minus}
+              onClick={() => {
+                setItemCount((prevCount) => {
+                  return --prevCount;
+                });
+              }}
+            ></ButtonIcon>
+            <span>{itemCount}</span>
+            <ButtonIcon
+              src={plus}
+              onClick={() => {
+                setItemCount((prevCount) => {
+                  return ++prevCount;
+                });
+              }}
+            ></ButtonIcon>
+          </QuantityCounterButton>
+        )}
       </ImageContainer>
 
       <ItemDescription>

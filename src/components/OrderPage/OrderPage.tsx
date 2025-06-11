@@ -1,57 +1,62 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styled from "styled-components";
 
 import OrderItem from "./OrderItem";
 
 import type { Item } from "../../types/item";
 
-const Container = styled.div`
-  display: flex;
-  padding: 4rem;
-  background: #fcf9f5;
-  min-height: 100vh;
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
-    padding: 0.25rem;
-  }
-`;
+import styled from "styled-components";
 
-const ItemsGrid = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr;
+import close from "../../assets/close.png";
+
+import {
+  Container,
+  ItemsDisplay,
+  ItemsGrid,
+  ItemsHeader,
+} from "./OrderPage.styles";
+
+const OrderSummaryContainer = styled.div`
+  display: flex;
   padding: 1rem;
-  row-gap: 1rem;
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
-    padding: 0.25rem;
-  }
-`;
-
-const ItemsDisplay = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  justify-content: flex-start;
+  width: 30%;
   @media (max-width: 1024px) {
     width: 100%;
+    padding: 0.25rem;
   }
 `;
 
-const ItemsHeader = styled.h2`
+const SummaryCard = styled.div`
+  width: 100%;
+  height: 50%;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0 2rem;
-  font-weight: 400;
-  @media (max-width: 1024px) {
-    padding: 0 1rem;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem;
+  background-color: white;
+  @media (max-width: 768px) {
+    height: auto;
   }
+`;
+
+const SummaryHeader = styled.h1`
+  color: #bc7964;
+  font-weight: 500;
+  padding: 0.5rem;
+`;
+
+const CartEntryContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.5px solid #f3f3f3;
+  align-items: center;
+  padding: 0.5rem;
+`;
+
+const CartEntryDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const OrderPage: React.FC = () => {
@@ -80,6 +85,119 @@ const OrderPage: React.FC = () => {
           ))}
         </ItemsGrid>
       </ItemsDisplay>
+      <OrderSummaryContainer>
+        <SummaryCard>
+          <SummaryHeader>Your Cart</SummaryHeader>
+          <CartEntryContainer>
+            <CartEntryDetail>
+              <div
+                style={{
+                  fontSize: "0.75rem",
+                  color: "#716A67",
+                  fontWeight: 600,
+                }}
+              >
+                Classic Tiramisu
+              </div>
+              <div
+                style={{ display: "flex", gap: "1rem", alignItems: "center" }}
+              >
+                <span
+                  style={{
+                    fontSize: "1rem",
+                    color: "#bc7964",
+                    fontWeight: 500,
+                  }}
+                >
+                  1x
+                </span>
+                <span
+                  style={{
+                    fontSize: "0.75rem",
+                    color: "#b7adac",
+                    fontWeight: 400,
+                  }}
+                >
+                  @5.50 5.50
+                </span>
+              </div>
+            </CartEntryDetail>
+            <img src={close} style={{ width: "1rem", height: "1rem" }}></img>
+          </CartEntryContainer>
+          <CartEntryContainer>
+            <CartEntryDetail>
+              <div
+                style={{
+                  fontSize: "0.75rem",
+                  color: "#716A67",
+                  fontWeight: 600,
+                }}
+              >
+                Classic Tiramisu
+              </div>
+              <div
+                style={{ display: "flex", gap: "1rem", alignItems: "center" }}
+              >
+                <span
+                  style={{
+                    fontSize: "1rem",
+                    color: "#bc7964",
+                    fontWeight: 500,
+                  }}
+                >
+                  1x
+                </span>
+                <span
+                  style={{
+                    fontSize: "0.75rem",
+                    color: "#b7adac",
+                    fontWeight: 400,
+                  }}
+                >
+                  @5.50 5.50
+                </span>
+              </div>
+            </CartEntryDetail>
+            <img src={close} style={{ width: "1rem", height: "1rem" }}></img>
+          </CartEntryContainer>
+          <CartEntryContainer>
+            <CartEntryDetail>
+              <div
+                style={{
+                  fontSize: "0.75rem",
+                  color: "#716A67",
+                  fontWeight: 600,
+                }}
+              >
+                Classic Tiramisu
+              </div>
+              <div
+                style={{ display: "flex", gap: "1rem", alignItems: "center" }}
+              >
+                <span
+                  style={{
+                    fontSize: "1rem",
+                    color: "#bc7964",
+                    fontWeight: 500,
+                  }}
+                >
+                  1x
+                </span>
+                <span
+                  style={{
+                    fontSize: "0.75rem",
+                    color: "#b7adac",
+                    fontWeight: 400,
+                  }}
+                >
+                  @5.50 5.50
+                </span>
+              </div>
+            </CartEntryDetail>
+            <img src={close} style={{ width: "1rem", height: "1rem" }}></img>
+          </CartEntryContainer>
+        </SummaryCard>
+      </OrderSummaryContainer>
     </Container>
   );
 };
