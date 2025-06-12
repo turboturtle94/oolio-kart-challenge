@@ -3,7 +3,7 @@ import cart from "../../assets/cart.png";
 import plus from "../../assets/plus.png";
 import minus from "../../assets/minus.png";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Container,
@@ -14,24 +14,42 @@ import {
   QuantityCounterButton,
   ItemDescription,
 } from "./OrderItem.styles";
+import { useOrder } from "../../context/OrderContext";
 
 const OrderItem = (props: { item: Item }) => {
   const { item } = props;
-  const [itemCount, setItemCount] = useState<number>(0);
+  const { totalItemsOrdered, settotalItemsOrdered } = useOrder();
+  const [currentItemCount, setCurrentItemCount] = useState<number>(0);
+
+  useEffect(() => {
+    const itemCount = totalItemsOrdered.get(item.id);
+    setCurrentItemCount(itemCount ? itemCount : 0);
+  }, [totalItemsOrdered]);
+
+  const updateTotalItems = (op: string) => {
+    const newtotalItemsOrdered = new Map(totalItemsOrdered);
+    if (newtotalItemsOrdered.get(item.id)) {
+      const count = newtotalItemsOrdered.get(item.id) as number;
+      const newItemCount = op === "+" ? count + 1 : count - 1;
+      newtotalItemsOrdered.set(item.id, newItemCount);
+    } else {
+      newtotalItemsOrdered.set(item.id, 1);
+    }
+    settotalItemsOrdered(newtotalItemsOrdered);
+  };
+
   return (
     <Container>
-      <ImageContainer active={itemCount > 0}>
+      <ImageContainer active={currentItemCount > 0}>
         <picture>
           <source media="(min-width: 1024px)" srcSet={item.image.tablet} />
           <source media="(min-width: 650px)" srcSet={item.image.tablet} />
           <ItemImage src={item.image.mobile}></ItemImage>
         </picture>
-        {itemCount === 0 ? (
+        {currentItemCount === 0 ? (
           <AddToCartButton
             onClick={() => {
-              setItemCount((prevCount) => {
-                return ++prevCount;
-              });
+              updateTotalItems("+");
             }}
           >
             <ButtonIcon src={cart}></ButtonIcon>
@@ -42,18 +60,14 @@ const OrderItem = (props: { item: Item }) => {
             <ButtonIcon
               src={minus}
               onClick={() => {
-                setItemCount((prevCount) => {
-                  return --prevCount;
-                });
+                updateTotalItems("-");
               }}
             ></ButtonIcon>
-            <span>{itemCount}</span>
+            <span>{currentItemCount}</span>
             <ButtonIcon
               src={plus}
               onClick={() => {
-                setItemCount((prevCount) => {
-                  return ++prevCount;
-                });
+                updateTotalItems("+");
               }}
             ></ButtonIcon>
           </QuantityCounterButton>

@@ -1,11 +1,14 @@
 
 import './App.css'
 import OrderPage from './components/OrderPage/OrderPage'
+import { OrderProvider } from "./context/OrderContext";
 
 function App() {
   return (
-    <OrderPage></OrderPage>
-  )
+    <OrderProvider>
+      <OrderPage></OrderPage>
+    </OrderProvider>
+  );
 }
 
 export default App
