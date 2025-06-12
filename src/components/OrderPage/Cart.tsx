@@ -19,10 +19,11 @@ import close from "../../assets/close.png";
 import coupon from "../../assets/coupon.png";
 import type { Order } from "../../types/order";
 import { useOrder } from "../../context/OrderContext";
+import { useState } from "react";
 
 const Cart = ({ orderSummary }: { orderSummary: Order }) => {
-  const { totalItemsOrdered, settotalItemsOrdered } = useOrder();
-
+  const { totalItemsOrdered, settotalItemsOrdered, applyCoupon } = useOrder();
+  const [couponCode, setCouponCode] = useState("");
   const getItemQuantity = (id: string): number => {
     return orderSummary?.items.find((i) => i.productId === id)?.quantity ?? 0;
   };
@@ -31,6 +32,11 @@ const Cart = ({ orderSummary }: { orderSummary: Order }) => {
     const newItemsOrdered = new Map(totalItemsOrdered);
     newItemsOrdered.set(id, 0);
     settotalItemsOrdered(newItemsOrdered);
+  };
+
+  const handleCoupon = () => {
+    applyCoupon(couponCode);
+    setCouponCode("");
   };
 
   return (
@@ -81,8 +87,19 @@ const Cart = ({ orderSummary }: { orderSummary: Order }) => {
         This is carbon neutral delivery
       </InfoContainer>
       <CouponContainer>
-        <CouponInput type="text" placeholder="Apply coupon" />
-        <CouponButton>
+        <CouponInput
+          type="text"
+          placeholder="Apply coupon"
+          onChange={(e) => {
+            setCouponCode(e.target.value);
+          }}
+          value={couponCode || ""}
+        />
+        <CouponButton
+          onClick={() => {
+            handleCoupon();
+          }}
+        >
           <img src={coupon}></img>
         </CouponButton>
       </CouponContainer>

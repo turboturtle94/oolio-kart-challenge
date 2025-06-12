@@ -14,7 +14,7 @@ import Cart from "./Cart";
 import EmptyCart from "./EmptyCart";
 
 const OrderSummary = ({ items }: { items: Item[] }) => {
-  const { totalItemsOrdered } = useOrder();
+  const { totalItemsOrdered, coupon } = useOrder();
   const [orderSummary, setOrderSummary] = useState<Order>();
 
   const mapToProduct = (item: Item): Product => ({
@@ -66,9 +66,47 @@ const OrderSummary = ({ items }: { items: Item[] }) => {
     setOrderSummary(summary);
   };
 
+  const handleCouponCode = (code: string) => {
+    switch (code.toUpperCase()) {
+      case "HAPPYHOURS":
+        applyHappyHours();
+        break;
+      case "BUYGETONE":
+        applyBuyGetOne();
+        break;
+      default:
+        code && alert("Invalid coupon code");
+    }
+  };
+
+  const applyHappyHours = () => {
+    const newSummary = { ...orderSummary } as Order;
+    const currentTotal = orderSummary?.totalCost as number;
+    const discountedTotal = currentTotal * (18 / 100);
+    newSummary.totalCost = newSummary.totalCost - discountedTotal;
+    setOrderSummary(newSummary);
+  };
+
+  const applyBuyGetOne = () => {
+    const newSummary = { ...orderSummary } as Order;
+    const lowestPricedItem = items.sort(
+      (a, b) => a.price - b.price
+    )[0] as Product;
+    newSummary.items.push({ productId: lowestPricedItem.id, quantity: 1 });
+    newSummary.products.push({
+      ...lowestPricedItem,
+      price: 0,
+    });
+    setOrderSummary(newSummary);
+  };
+
   useEffect(() => {
     formOrderSummary();
   }, [totalItemsOrdered]);
+
+  useEffect(() => {
+    handleCouponCode(coupon);
+  }, [coupon]);
 
   return (
     <OrderSummaryContainer>

@@ -4,6 +4,8 @@ const OrderContext = createContext<
   | {
       totalItemsOrdered: Map<string, number>;
       settotalItemsOrdered: Function;
+      coupon: string;
+      applyCoupon: Function;
     }
   | undefined
 >(undefined);
@@ -21,11 +23,15 @@ export const OrderProvider = ({ children }: { children: ReactNode }) => {
     Map<string, number>
   >(new Map<string, number>());
 
+  const [coupon, applyCoupon] = useState<string>("");
+
   return (
     <OrderContext
       value={{
         totalItemsOrdered,
         settotalItemsOrdered,
+        coupon,
+        applyCoupon,
       }}
     >
       {children}
