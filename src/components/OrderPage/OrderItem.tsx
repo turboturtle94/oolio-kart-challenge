@@ -15,6 +15,7 @@ import {
   IconButton,
 } from "./OrderItem.styles";
 import { useOrder } from "../../context/OrderContext";
+import ItemImageDisplay from "./ItemImage";
 
 const OrderItem = (props: { item: Item }) => {
   const { item } = props;
@@ -41,6 +42,7 @@ const OrderItem = (props: { item: Item }) => {
   return (
     <Container>
       <ImageContainer active={currentItemCount > 0}>
+        <ItemImageDisplay src={item.image}></ItemImageDisplay>
         {currentItemCount === 0 ? (
           <AddToCartButton
             onClick={() => {

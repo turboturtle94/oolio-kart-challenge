@@ -8,19 +8,27 @@ const ItemImageDisplay = ({
   src: { mobile: string; desktop: string; tablet: string; thumbnail: string };
 }) => {
   const [loaded, setLoaded] = useState(false);
-  return loaded ? (
-    <picture
-      onLoad={() => {
-        setLoaded(true);
-      }}
-    >
-      <source media="(min-width: 1024px)" srcSet={src.tablet} />
-      <source media="(min-width: 650px)" srcSet={src.tablet} />
-      <ItemImage src={src.mobile}></ItemImage>
-    </picture>
-  ) : (
-    <></>
-  );
+
+
+  const srcSet = `
+    ${src.tablet} 650w,
+    ${src.desktop} 1024w
+  `;
+
+  const sizes = `
+    (min-width: 1024px) 33vw,
+    (min-width: 650px) 50vw,
+    100vw
+  `;
+  return (
+    <ItemImage
+      src={src.mobile}
+      srcSet={srcSet}
+      sizes={sizes}
+      onLoad={() => setLoaded(true)}
+      style={{ display: loaded ? "block" : "none" }}
+    ></ItemImage>
+  ); 
 };
 
 export default ItemImageDisplay;
