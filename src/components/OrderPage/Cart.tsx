@@ -20,10 +20,28 @@ import coupon from "../../assets/coupon.png";
 import type { Order } from "../../types/order";
 import { useOrder } from "../../context/OrderContext";
 import { useState } from "react";
+import OrderConfirmationDialog from "./OrderConfirmationDialog";
+import type { Item } from "../../types/item";
 
-const Cart = ({ orderSummary }: { orderSummary: Order }) => {
+const Cart = ({
+  orderSummary,
+  items,
+}: {
+  orderSummary: Order;
+  items: Item[];
+}) => {
   const { totalItemsOrdered, settotalItemsOrdered, applyCoupon } = useOrder();
   const [couponCode, setCouponCode] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const confirmOrder = () => {
+    setOpen(true);
+  };
+
+  const closeConfirmDialog = () => {
+    setOpen(false);
+  };
+
   const getItemQuantity = (id: string): number => {
     return orderSummary?.items.find((i) => i.productId === id)?.quantity ?? 0;
   };
@@ -103,7 +121,19 @@ const Cart = ({ orderSummary }: { orderSummary: Order }) => {
           <img src={coupon}></img>
         </CouponButton>
       </CouponContainer>
-      <ConfirmOrderButton>Confirm Order</ConfirmOrderButton>
+      <ConfirmOrderButton
+        onClick={() => {
+          confirmOrder();
+        }}
+      >
+        Confirm Order
+      </ConfirmOrderButton>
+      <OrderConfirmationDialog
+        isOpen={open}
+        onClose={closeConfirmDialog}
+        orderSummary={orderSummary}
+        items={items}
+      ></OrderConfirmationDialog>
     </>
   );
 };

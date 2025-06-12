@@ -115,7 +115,7 @@ const OrderSummary = ({ items }: { items: Item[] }) => {
           Your Cart ({orderSummary?.products.length})
         </SummaryHeader>
         {orderSummary && orderSummary.products.length > 0 ? (
-          <Cart orderSummary={orderSummary}></Cart>
+          <Cart orderSummary={orderSummary} items={items}></Cart>
         ) : (
           <EmptyCart></EmptyCart>
         )}

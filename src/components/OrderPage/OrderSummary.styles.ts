@@ -159,3 +159,35 @@ export const EmptyCartText = styled.span`
   color: #988a87;
   font-weight: 500;
 `;
+
+export const OrderConfirmationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1.5rem;
+  gap: 1rem;
+`;
+
+export const OrderConfirmationTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  h2 {
+    font-weight: 500;
+  }
+
+  span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #a59b99;
+  }
+`;
+
+export const OrderConfirmationThumbnail = styled.div`
+  max-width: 3rem;
+  max-height: 3rem;
+  aspect-ratio: 1;
+  img {
+    width: 3rem;
+    height: 3rem;
+  }
+`;
