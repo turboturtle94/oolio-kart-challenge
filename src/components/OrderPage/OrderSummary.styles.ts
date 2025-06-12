@@ -27,7 +27,7 @@ export const CartTotalContainer = styled.div`
   padding: 1rem;
 `;
 
-export const CartInfoContainer = styled.div`
+export const InfoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,3 +75,21 @@ export const SummaryCard = styled.div`
     height: auto;
   }
 `;
+
+export const ItemName = styled.div`
+  font-size: 0.75rem;
+  color: "#716A67";
+  font-weight: 600;
+`;
+
+export const ItemQty = styled.span`
+  font-size: 1rem;
+  color: #bc7964;
+  font-weight: 600;
+`;
+export const ItemPrice = styled.span`
+  font-size: 0.75rem;
+  color: #b7adac;
+  font-weight: 400;
+`;
+

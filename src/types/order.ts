@@ -1,17 +1,18 @@
 export interface Order {
   id: string;
-  items: [
-    {
-      productId: string;
-      quantity: number;
-    },
-  ];
-  products: [
-    {
-      id: string;
-      name: string;
-      price: number;
-      category: string;
-    },
-  ];
+  items: Item[];
+  products: Product[];
+  totalCost: number;
+}
+
+export interface Product {
+  id: string;
+  category: string;
+  price: number;
+  name: string;
+}
+
+export interface Item {
+  productId: string;
+  quantity: number;
 }

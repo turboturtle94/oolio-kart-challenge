@@ -41,7 +41,7 @@ const OrderPage: React.FC = () => {
             ))}
           </ItemsGrid>
         </ItemsDisplay>
-        <OrderSummary></OrderSummary>
+        <OrderSummary items={items}></OrderSummary>
       </Container>
     </OrderProvider>
   );
