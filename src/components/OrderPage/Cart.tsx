@@ -5,14 +5,32 @@ import {
   ItemName,
   ItemPrice,
   ItemQty,
+  InfoContainer,
+  ConfirmOrderButton,
+  CouponButton,
+  CouponInput,
+  CouponContainer,
 } from "./OrderSummary.styles";
 
+import { IconButton, ButtonIcon } from "./OrderItem.styles";
+
+import tree from "../../assets/tree.png";
 import close from "../../assets/close.png";
+import coupon from "../../assets/coupon.png";
 import type { Order } from "../../types/order";
+import { useOrder } from "../../context/OrderContext";
 
 const Cart = ({ orderSummary }: { orderSummary: Order }) => {
+  const { totalItemsOrdered, settotalItemsOrdered } = useOrder();
+
   const getItemQuantity = (id: string): number => {
     return orderSummary?.items.find((i) => i.productId === id)?.quantity ?? 0;
+  };
+
+  const removeItemsFromCart = (id: string) => {
+    const newItemsOrdered = new Map(totalItemsOrdered);
+    newItemsOrdered.set(id, 0);
+    settotalItemsOrdered(newItemsOrdered);
   };
 
   return (
@@ -34,11 +52,14 @@ const Cart = ({ orderSummary }: { orderSummary: Order }) => {
               </ItemPrice>
             </div>
           </CartEntryDetail>
-          <img
-            src={close}
-            alt="Remove"
-            style={{ width: "1rem", height: "1rem" }}
-          />
+          <IconButton
+            $borderColor="#c73b0d"
+            onClick={() => {
+              removeItemsFromCart(product.id);
+            }}
+          >
+            <ButtonIcon src={close} alt="Remove" />
+          </IconButton>
         </CartEntryContainer>
       ))}
       <CartTotalContainer>
@@ -51,6 +72,21 @@ const Cart = ({ orderSummary }: { orderSummary: Order }) => {
           ${orderSummary?.totalCost.toFixed(2) ?? "0.00"}
         </span>
       </CartTotalContainer>
+      <InfoContainer>
+        <img
+          src={tree}
+          alt="carbon-neutral"
+          style={{ width: "1rem", height: "1rem" }}
+        />
+        This is carbon neutral delivery
+      </InfoContainer>
+      <CouponContainer>
+        <CouponInput type="text" placeholder="Apply coupon" />
+        <CouponButton>
+          <img src={coupon}></img>
+        </CouponButton>
+      </CouponContainer>
+      <ConfirmOrderButton>Confirm Order</ConfirmOrderButton>
     </>
   );
 };

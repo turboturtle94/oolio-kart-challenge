@@ -52,3 +52,4 @@ export const ItemsHeader = styled.h2`
     padding: 0 1rem;
   }
 `;
+

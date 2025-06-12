@@ -45,6 +45,54 @@ export const ConfirmOrderButton = styled.button`
   color: white;
   border-radius: 1.5rem;
   border: none;
+  &:hover {
+    filter: brightness(0.9);
+  }
+  &:focus-visible {
+    outline: none;
+  }
+`;
+
+export const CouponContainer = styled.div`
+  display: flex;
+  height: 3em;
+  width: 100%;
+  justify: center;
+  align-items: center;
+`;
+
+export const CouponInput = styled.input`
+  height: 3rem;
+  width: calc(100% - 3rem);
+  background-color: white;
+  border: none;
+  font-size: 1rem;
+  border: 1px solid #c73b0d;
+  &:focus-visible {
+    outline: none;
+  }
+  padding: 1rem;
+`;
+
+export const CouponButton = styled.button`
+  display: flex;
+  width: 3rem;
+  height: 100%;
+  padding: 2px;
+  justify-content: center;
+  align-items: center;
+  background-color: #c73b0d;
+  border: none;
+  &:hover {
+    filter: brightness(0.9);
+  }
+  &:focus-visible {
+    outline: none;
+  }
+  img {
+    width: 2rem;
+    margin-top: 8px;
+  }
 `;
 
 export const OrderSummaryContainer = styled.div`
@@ -59,7 +107,7 @@ export const OrderSummaryContainer = styled.div`
 
 export const SummaryCard = styled.div`
   width: 100%;
-  min-height: 50%;
+  min-height: 30%;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -93,3 +141,21 @@ export const ItemPrice = styled.span`
   font-weight: 400;
 `;
 
+export const EmptyCartContainer = styled.div`
+  display: flex;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+`;
+
+export const EmptyCartImage = styled.img`
+  width: 10rem;
+  height: 10rem;
+`;
+
+export const EmptyCartText = styled.span`
+  color: #988a87;
+  font-weight: 500;
+`;

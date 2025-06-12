@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import tree from "../../assets/tree.png";
 import { useOrder } from "../../context/OrderContext";
 
 import type { Order, Item as OrderedItem, Product } from "../../types/order";
@@ -9,11 +8,10 @@ import {
   OrderSummaryContainer,
   SummaryCard,
   SummaryHeader,
-  InfoContainer,
-  ConfirmOrderButton,
 } from "./OrderSummary.styles";
 
 import Cart from "./Cart";
+import EmptyCart from "./EmptyCart";
 
 const OrderSummary = ({ items }: { items: Item[] }) => {
   const { totalItemsOrdered } = useOrder();
@@ -75,21 +73,14 @@ const OrderSummary = ({ items }: { items: Item[] }) => {
   return (
     <OrderSummaryContainer>
       <SummaryCard>
-        <SummaryHeader>Your Cart</SummaryHeader>
-        {orderSummary && orderSummary.products ? (
+        <SummaryHeader>
+          Your Cart ({orderSummary?.products.length})
+        </SummaryHeader>
+        {orderSummary && orderSummary.products.length > 0 ? (
           <Cart orderSummary={orderSummary}></Cart>
         ) : (
-          <></>
+          <EmptyCart></EmptyCart>
         )}
-        <InfoContainer>
-          <img
-            src={tree}
-            alt="carbon-neutral"
-            style={{ width: "1rem", height: "1rem" }}
-          />
-          This is carbon neutral delivery
-        </InfoContainer>
-        <ConfirmOrderButton>Confirm Order</ConfirmOrderButton>
       </SummaryCard>
     </OrderSummaryContainer>
   );

@@ -8,11 +8,11 @@ import { useEffect, useState } from "react";
 import {
   Container,
   ImageContainer,
-  ItemImage,
   AddToCartButton,
   ButtonIcon,
   QuantityCounterButton,
   ItemDescription,
+  IconButton,
 } from "./OrderItem.styles";
 import { useOrder } from "../../context/OrderContext";
 
@@ -41,11 +41,6 @@ const OrderItem = (props: { item: Item }) => {
   return (
     <Container>
       <ImageContainer active={currentItemCount > 0}>
-        <picture>
-          <source media="(min-width: 1024px)" srcSet={item.image.tablet} />
-          <source media="(min-width: 650px)" srcSet={item.image.tablet} />
-          <ItemImage src={item.image.mobile}></ItemImage>
-        </picture>
         {currentItemCount === 0 ? (
           <AddToCartButton
             onClick={() => {
@@ -57,19 +52,21 @@ const OrderItem = (props: { item: Item }) => {
           </AddToCartButton>
         ) : (
           <QuantityCounterButton>
-            <ButtonIcon
-              src={minus}
+            <IconButton
               onClick={() => {
                 updateTotalItems("-");
               }}
-            ></ButtonIcon>
+            >
+              <ButtonIcon src={minus}></ButtonIcon>
+            </IconButton>
             <span>{currentItemCount}</span>
-            <ButtonIcon
-              src={plus}
+            <IconButton
               onClick={() => {
                 updateTotalItems("+");
               }}
-            ></ButtonIcon>
+            >
+              <ButtonIcon src={plus}></ButtonIcon>
+            </IconButton>
           </QuantityCounterButton>
         )}
       </ImageContainer>

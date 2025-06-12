@@ -19,7 +19,7 @@ export const Container = styled.div`
 export const ImageContainer = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "active",
 })<{ active: boolean }>`
-  max-width: 250px;
+  width: 250px;
   aspect-ratio: 1;
   border-radius: 8px;
   @media (max-width: 1024px) {
@@ -65,6 +65,14 @@ export const AddToCartButton = styled.button`
   top: 100%;
   transform: translate(-50%, -50%);
   cursor: pointer;
+  &:hover {
+    filter: brightness(0.9);
+    border: 1px solid #c73b0d;
+  }
+  &:focus-visible {
+    outline: none;
+    border: 1px solid #c73b0d;
+  }
   @media (max-width: 1024px) {
     width: 4rem;
     span {
@@ -73,7 +81,7 @@ export const AddToCartButton = styled.button`
   }
 `;
 
-export const QuantityCounterButton = styled.button`
+export const QuantityCounterButton = styled.span`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -90,10 +98,36 @@ export const QuantityCounterButton = styled.button`
   padding: 1rem;
   color: white;
   cursor: pointer;
+
+  &:focus-visible {
+    outline: none;
+  }
+
   @media (max-width: 1024px) {
     width: 5rem;
     justify-content: center;
     padding: 0;
+  }
+`;
+interface IconButtonProps {
+  $borderColor?: string;
+}
+
+export const IconButton = styled.button<IconButtonProps>`
+  width: 1rem;
+  height: 1rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  &:focus-visible,
+  &:hover {
+    outline: none;
+    border: 2px solid ${({ $borderColor }) => $borderColor || "white"};
   }
 `;
 
