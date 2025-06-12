@@ -56,7 +56,15 @@ const OrderConfirmation = ({
                 ></img>
               </OrderConfirmationThumbnail>
               <CartEntryDetail>
-                <ItemName>{product.name}</ItemName>
+                <ItemName
+                  style={{
+                    fontSize: "0.75rem",
+                    color: "#695F5D",
+                    fontWeight: 600,
+                  }}
+                >
+                  {product.name}
+                </ItemName>
                 <div
                   style={{
                     display: "flex",
@@ -65,9 +73,20 @@ const OrderConfirmation = ({
                   }}
                 >
                   <ItemQty>{1}x</ItemQty>
-                  <ItemPrice>@{product.price}</ItemPrice>
+                  <ItemPrice
+                    style={{
+                      fontSize: "0.75rem",
+                      color: "#C9C0BD",
+                      fontWeight: 600,
+                    }}
+                  >
+                    @{product.price}
+                  </ItemPrice>
                 </div>
               </CartEntryDetail>
+            </div>
+            <div style={{ color: "#5D5351" }}>
+              ${product.price * getItemQuantity(product.id)}
             </div>
           </CartEntryContainer>
         ))}
@@ -83,7 +102,7 @@ const OrderConfirmation = ({
         </CartTotalContainer>
       </div>
 
-      <ConfirmOrderButton>Confirm Order</ConfirmOrderButton>
+      <ConfirmOrderButton>Start New Order</ConfirmOrderButton>
     </OrderConfirmationContainer>
   );
 };
