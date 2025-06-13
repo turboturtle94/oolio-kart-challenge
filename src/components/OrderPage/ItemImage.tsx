@@ -1,6 +1,6 @@
-import { ItemImage } from "./styles/OrderItem.styles";
-
 import { useState } from "react";
+import Skeleton from "@mui/material/Skeleton";
+import { ItemImage } from "./styles/OrderItem.styles";
 
 const ItemImageDisplay = ({
   src,
@@ -19,14 +19,27 @@ const ItemImageDisplay = ({
     (min-width: 650px) 50vw,
     100vw
   `;
+
   return (
-    <ItemImage
-      src={src.mobile}
-      srcSet={srcSet}
-      sizes={sizes}
-      onLoad={() => setLoaded(true)}
-      style={{ display: loaded ? "block" : "none" }}
-    ></ItemImage>
+    <>
+      {!loaded && (
+        <Skeleton
+          variant="rectangular"
+          width="100%"
+          height="100%"
+          sx={{ borderRadius: "8px" }}
+        />
+      )}
+      <ItemImage
+        src={src.mobile}
+        srcSet={srcSet}
+        sizes={sizes}
+        onLoad={() => setLoaded(true)}
+        style={{
+          display: loaded ? "block" : "none",
+        }}
+      />
+    </>
   );
 };
 

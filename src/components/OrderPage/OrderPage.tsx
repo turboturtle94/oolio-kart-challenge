@@ -14,8 +14,12 @@ import {
 } from "./styles/OrderPage.styles";
 import OrderSummary from "./OrderSummary";
 
+import Skeleton from "@mui/material/Skeleton";
+import Box from "@mui/material/Box";
+
 const OrderPage: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -24,6 +28,8 @@ const OrderPage: React.FC = () => {
         setItems(res.data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -36,12 +42,25 @@ const OrderPage: React.FC = () => {
         <ItemsDisplay>
           <ItemsHeader>Desserts</ItemsHeader>
           <ItemsGrid>
-            {items.map((item: Item, index: number) => (
-              <OrderItem item={item} key={`${item.name}${index}`}></OrderItem>
-            ))}
+            {loading
+              ? Array.from({ length: 6 }).map((_, index) => (
+                  <Box key={index}>
+                    <Skeleton
+                      variant="rectangular"
+                      width="100%"
+                      height={200}
+                      sx={{ borderRadius: 2 }}
+                    />
+                    <Skeleton variant="text" width="80%" />
+                    <Skeleton variant="text" width="60%" />
+                  </Box>
+                ))
+              : items.map((item: Item, index: number) => (
+                  <OrderItem item={item} key={`${item.name}${index}`} />
+                ))}
           </ItemsGrid>
         </ItemsDisplay>
-        <OrderSummary items={items}></OrderSummary>
+        <OrderSummary items={items} />
       </Container>
     </OrderProvider>
   );
