@@ -24,11 +24,13 @@ export const DialogBox = styled.div`
 
   @media (min-width: 768px) {
     width: 80%;
+    max-height: 80vh;
   }
 
   @media (min-width: 1024px) {
     width: 60%;
     max-width: 600px;
+    max-height: 100vh;
   }
 `;
 
@@ -56,12 +58,14 @@ export const ItemTotalCost = styled.div`
 `;
 
 export const OrderConfirmationCard = styled.div`
-    background-color: #FCF8F5;
-    padding: 1rem;
-    border-radius: 8
-    display: flex;
-    flex-direction: column,
-    justify-content: center,
+  background-color: #fcf8f5;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+  max-height: 90vh;
 `;
 
 export const OrderConfirmationContainer = styled.div`

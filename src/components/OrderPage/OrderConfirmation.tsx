@@ -23,9 +23,11 @@ import {
 const OrderConfirmation = ({
   orderSummary,
   items,
+  closeConfirmation,
 }: {
   orderSummary: Order;
   items: Item[];
+  closeConfirmation: Function;
 }) => {
   const getItemQuantity = (id: string): number => {
     return orderSummary?.items.find((i) => i.productId === id)?.quantity ?? 0;
@@ -71,7 +73,13 @@ const OrderConfirmation = ({
         </CartTotalContainer>
       </OrderConfirmationCard>
 
-      <ConfirmOrderButton>Start New Order</ConfirmOrderButton>
+      <ConfirmOrderButton
+        onClick={() => {
+          closeConfirmation();
+        }}
+      >
+        Start New Order
+      </ConfirmOrderButton>
     </OrderConfirmationContainer>
   );
 };

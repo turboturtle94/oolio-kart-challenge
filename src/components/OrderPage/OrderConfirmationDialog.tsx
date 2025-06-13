@@ -26,6 +26,7 @@ const OrderConfirmationDialog = ({
           <OrderConfirmation
             orderSummary={orderSummary}
             items={items}
+            closeConfirmation={onClose}
           ></OrderConfirmation>
         </Body>
       </DialogBox>

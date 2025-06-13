@@ -1,5 +1,6 @@
 import type { Item as StockItem } from "./item";
 export interface Order {
+  couponCode: string | undefined;
   id: string;
   items: Item[];
   products: Product[];

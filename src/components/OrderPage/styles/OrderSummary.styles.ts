@@ -45,6 +45,7 @@ export const ConfirmOrderButton = styled.button`
   color: white;
   border-radius: 1.5rem;
   border: none;
+  cursor: pointer;
   &:hover {
     filter: brightness(0.9);
   }
@@ -114,11 +115,6 @@ export const SummaryCard = styled.div`
   gap: 1rem;
   padding: 1.5rem;
   background-color: white;
-
-  @media (max-width: 1024px) {
-    height: 30%;
-  }
-
   @media (max-width: 768px) {
     height: auto;
   }

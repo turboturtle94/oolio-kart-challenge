@@ -57,6 +57,7 @@ const OrderSummary = ({ items }: { items: Item[] }) => {
     });
 
     const summary: Order = {
+      couponCode: "",
       id: crypto.randomUUID(),
       items: orderedItems,
       products: orderedProducts,
@@ -69,25 +70,26 @@ const OrderSummary = ({ items }: { items: Item[] }) => {
   const handleCouponCode = (code: string) => {
     switch (code.toUpperCase()) {
       case "HAPPYHOURS":
-        applyHappyHours();
+        applyHappyHours(code);
         break;
       case "BUYGETONE":
-        applyBuyGetOne();
+        applyBuyGetOne(code);
         break;
       default:
         code && alert("Invalid coupon code");
     }
   };
 
-  const applyHappyHours = () => {
+  const applyHappyHours = (code: string) => {
     const newSummary = { ...orderSummary } as Order;
     const currentTotal = orderSummary?.totalCost as number;
     const discountedTotal = currentTotal * (18 / 100);
     newSummary.totalCost = newSummary.totalCost - discountedTotal;
+    newSummary.couponCode = code;
     setOrderSummary(newSummary);
   };
 
-  const applyBuyGetOne = () => {
+  const applyBuyGetOne = (code: string) => {
     const newSummary = { ...orderSummary } as Order;
     const lowestPricedItem = items.sort(
       (a, b) => a.price - b.price
@@ -97,6 +99,7 @@ const OrderSummary = ({ items }: { items: Item[] }) => {
       ...lowestPricedItem,
       price: 0,
     });
+    newSummary.couponCode = code;
     setOrderSummary(newSummary);
   };
 

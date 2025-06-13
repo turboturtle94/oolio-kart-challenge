@@ -19,6 +19,11 @@ export const ItemsGrid = styled.div`
   grid-template-rows: 1fr;
   padding: 1rem;
   row-gap: 1rem;
+  @media (max-width: 1280px) {
+    grid-template-columns: 1fr 1fr;
+    padding: 0.25rem;
+  }
+
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
     padding: 0.25rem;

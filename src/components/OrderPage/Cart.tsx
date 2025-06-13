@@ -24,6 +24,8 @@ import { useState } from "react";
 import OrderConfirmationDialog from "./OrderConfirmationDialog";
 import type { Item } from "../../types/item";
 
+import axios from "axios";
+
 const Cart = ({
   orderSummary,
   items,
@@ -31,15 +33,35 @@ const Cart = ({
   orderSummary: Order;
   items: Item[];
 }) => {
-  const { totalItemsOrdered, settotalItemsOrdered, applyCoupon } = useOrder();
+  const {
+    totalItemsOrdered,
+    settotalItemsOrdered,
+    applyCoupon,
+    coupon: appliedCoupon,
+  } = useOrder();
   const [couponCode, setCouponCode] = useState("");
   const [open, setOpen] = useState(false);
+  const [confirmedOrder, setConfirmedOrder] = useState<Order>(orderSummary);
+  const confirmOrder = async () => {
+    try {
+      await createOrder();
+      setConfirmedOrder(orderSummary);
+      setOpen(true);
+    } catch (e) {
+      alert("Order failed!");
+    }
+  };
 
-  const confirmOrder = () => {
-    setOpen(true);
+  const createOrder = async () => {
+    axios.post("/api/order", orderSummary, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   const closeConfirmDialog = () => {
+    settotalItemsOrdered(new Map<string, number>());
     setOpen(false);
   };
 
@@ -123,8 +145,8 @@ const Cart = ({
         </CouponButton>
       </CouponContainer>
       <ConfirmOrderButton
-        onClick={() => {
-          confirmOrder();
+        onClick={async () => {
+          await confirmOrder();
         }}
       >
         Confirm Order
@@ -132,7 +154,7 @@ const Cart = ({
       <OrderConfirmationDialog
         isOpen={open}
         onClose={closeConfirmDialog}
-        orderSummary={orderSummary}
+        orderSummary={confirmedOrder}
         items={items}
       ></OrderConfirmationDialog>
     </>
