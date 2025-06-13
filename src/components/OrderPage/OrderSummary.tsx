@@ -8,7 +8,7 @@ import {
   OrderSummaryContainer,
   SummaryCard,
   SummaryHeader,
-} from "./OrderSummary.styles";
+} from "./styles/OrderSummary.styles";
 
 import Cart from "./Cart";
 import EmptyCart from "./EmptyCart";

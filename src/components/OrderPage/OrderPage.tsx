@@ -11,7 +11,7 @@ import {
   ItemsDisplay,
   ItemsGrid,
   ItemsHeader,
-} from "./OrderPage.styles";
+} from "./styles/OrderPage.styles";
 import OrderSummary from "./OrderSummary";
 
 const OrderPage: React.FC = () => {

@@ -17,7 +17,7 @@ export const CartEntryContainer = styled.div`
 export const CartEntryDetail = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 `;
 
 export const CartTotalContainer = styled.div`
@@ -125,8 +125,8 @@ export const SummaryCard = styled.div`
 `;
 
 export const ItemName = styled.div`
-  font-size: 0.75rem;
-  color: "#716A67";
+  font-size: 0.8rem;
+  color: #716a67;
   font-weight: 600;
 `;
 
@@ -136,9 +136,9 @@ export const ItemQty = styled.span`
   font-weight: 600;
 `;
 export const ItemPrice = styled.span`
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #b7adac;
-  font-weight: 400;
+  font-weight: 600;
 `;
 
 export const EmptyCartContainer = styled.div`
@@ -160,34 +160,8 @@ export const EmptyCartText = styled.span`
   font-weight: 500;
 `;
 
-export const OrderConfirmationContainer = styled.div`
+export const ItemNameGroup = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 1.5rem;
+  align-items: center;
   gap: 1rem;
-`;
-
-export const OrderConfirmationTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  h2 {
-    font-weight: 500;
-  }
-
-  span {
-    font-size: 1rem;
-    font-weight: 400;
-    color: #a59b99;
-  }
-`;
-
-export const OrderConfirmationThumbnail = styled.div`
-  max-width: 3rem;
-  max-height: 3rem;
-  aspect-ratio: 1;
-  img {
-    width: 3rem;
-    height: 3rem;
-  }
 `;

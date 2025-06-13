@@ -1,4 +1,4 @@
-import { ItemImage } from "./OrderItem.styles";
+import { ItemImage } from "./styles/OrderItem.styles";
 
 import { useState } from "react";
 
@@ -8,7 +8,6 @@ const ItemImageDisplay = ({
   src: { mobile: string; desktop: string; tablet: string; thumbnail: string };
 }) => {
   const [loaded, setLoaded] = useState(false);
-
 
   const srcSet = `
     ${src.tablet} 650w,
@@ -28,7 +27,7 @@ const ItemImageDisplay = ({
       onLoad={() => setLoaded(true)}
       style={{ display: loaded ? "block" : "none" }}
     ></ItemImage>
-  ); 
+  );
 };
 
 export default ItemImageDisplay;

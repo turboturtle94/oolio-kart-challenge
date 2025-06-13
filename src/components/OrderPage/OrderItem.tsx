@@ -13,7 +13,7 @@ import {
   QuantityCounterButton,
   ItemDescription,
   IconButton,
-} from "./OrderItem.styles";
+} from "./styles/OrderItem.styles";
 import { useOrder } from "../../context/OrderContext";
 import ItemImageDisplay from "./ItemImage";
 

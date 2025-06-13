@@ -10,9 +10,10 @@ import {
   CouponButton,
   CouponInput,
   CouponContainer,
-} from "./OrderSummary.styles";
+  ItemNameGroup,
+} from "./styles/OrderSummary.styles";
 
-import { IconButton, ButtonIcon } from "./OrderItem.styles";
+import { IconButton, ButtonIcon } from "./styles/OrderItem.styles";
 
 import tree from "../../assets/tree.png";
 import close from "../../assets/close.png";
@@ -63,7 +64,7 @@ const Cart = ({
         <CartEntryContainer key={product.id}>
           <CartEntryDetail>
             <ItemName>{product.name}</ItemName>
-            <div
+            <ItemNameGroup
               style={{
                 display: "flex",
                 gap: "1rem",
@@ -74,7 +75,7 @@ const Cart = ({
               <ItemPrice>
                 @{product.price} ${product.price * getItemQuantity(product.id)}
               </ItemPrice>
-            </div>
+            </ItemNameGroup>
           </CartEntryDetail>
           <IconButton
             $borderColor="#c73b0d"

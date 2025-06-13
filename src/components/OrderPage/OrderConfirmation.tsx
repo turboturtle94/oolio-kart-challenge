@@ -3,15 +3,22 @@ import type { Item } from "../../types/item";
 import {
   CartEntryContainer,
   CartEntryDetail,
-  OrderConfirmationContainer,
-  OrderConfirmationTitle,
   ItemName,
   ItemQty,
   ItemPrice,
-  OrderConfirmationThumbnail,
   CartTotalContainer,
   ConfirmOrderButton,
-} from "./OrderSummary.styles";
+} from "./styles/OrderSummary.styles";
+
+import {
+  OrderConfirmationContainer,
+  OrderConfirmationTitle,
+  ItemPriceGroup,
+  ItemTotalCost,
+  ProductHeader,
+  OrderConfirmationCard,
+  OrderConfirmationThumbnail,
+} from "./styles/OrderConfirmation.styles";
 
 const OrderConfirmation = ({
   orderSummary,
@@ -30,64 +37,27 @@ const OrderConfirmation = ({
         <h2>Order Confirmed</h2>
         <span>We hope you enjoy your food</span>
       </OrderConfirmationTitle>
-      <div
-        style={{
-          backgroundColor: "#FCF8F5",
-          padding: "1rem",
-          borderRadius: 8,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
+      <OrderConfirmationCard>
+        Z{" "}
         {orderSummary.products.map((product, index) => (
           <CartEntryContainer key={index}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-                gap: "0.5rem",
-              }}
-            >
+            <ProductHeader>
               <OrderConfirmationThumbnail>
                 <img
                   src={items.find((i) => i.id === product.id)?.image.thumbnail}
                 ></img>
               </OrderConfirmationThumbnail>
               <CartEntryDetail>
-                <ItemName
-                  style={{
-                    fontSize: "0.75rem",
-                    color: "#695F5D",
-                    fontWeight: 600,
-                  }}
-                >
-                  {product.name}
-                </ItemName>
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "1rem",
-                    alignItems: "center",
-                  }}
-                >
+                <ItemName>{product.name}</ItemName>
+                <ItemPriceGroup>
                   <ItemQty>{1}x</ItemQty>
-                  <ItemPrice
-                    style={{
-                      fontSize: "0.75rem",
-                      color: "#C9C0BD",
-                      fontWeight: 600,
-                    }}
-                  >
-                    @{product.price}
-                  </ItemPrice>
-                </div>
+                  <ItemPrice>@{product.price}</ItemPrice>
+                </ItemPriceGroup>
               </CartEntryDetail>
-            </div>
-            <div style={{ color: "#5D5351" }}>
+            </ProductHeader>
+            <ItemTotalCost>
               ${product.price * getItemQuantity(product.id)}
-            </div>
+            </ItemTotalCost>
           </CartEntryContainer>
         ))}
         <CartTotalContainer>
@@ -100,7 +70,7 @@ const OrderConfirmation = ({
             ${orderSummary?.totalCost.toFixed(2) ?? "0.00"}
           </span>
         </CartTotalContainer>
-      </div>
+      </OrderConfirmationCard>
 
       <ConfirmOrderButton>Start New Order</ConfirmOrderButton>
     </OrderConfirmationContainer>

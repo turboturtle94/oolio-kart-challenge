@@ -2,7 +2,7 @@ import {
   EmptyCartContainer,
   EmptyCartImage,
   EmptyCartText,
-} from "./OrderSummary.styles";
+} from "./styles/OrderSummary.styles";
 import emptycart from "../../assets/emptycart.png";
 
 const EmptyCart = () => {
