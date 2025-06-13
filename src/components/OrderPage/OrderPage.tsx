@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../lib/axios";
 
 import OrderItem from "./OrderItem";
 import { OrderProvider } from "../../context/OrderContext";
@@ -20,7 +20,7 @@ const OrderPage: React.FC = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const res = await axios.get<Item[]>("/api/product");
+        const res = await api.get<Item[]>("/product");
         setItems(res.data);
       } catch (err) {
         console.error(err);

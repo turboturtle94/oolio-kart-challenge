@@ -24,7 +24,7 @@ import { useState } from "react";
 import OrderConfirmationDialog from "./OrderConfirmationDialog";
 import type { Item } from "../../types/item";
 
-import axios from "axios";
+import api from "../../lib/axios";
 
 const Cart = ({
   orderSummary,
@@ -48,7 +48,7 @@ const Cart = ({
   };
 
   const createOrder = async () => {
-    axios.post("/api/order", orderSummary, {
+    api.post("/order", orderSummary, {
       headers: {
         "Content-Type": "application/json",
       },
