@@ -33,12 +33,7 @@ const Cart = ({
   orderSummary: Order;
   items: Item[];
 }) => {
-  const {
-    totalItemsOrdered,
-    settotalItemsOrdered,
-    applyCoupon,
-    coupon: appliedCoupon,
-  } = useOrder();
+  const { totalItemsOrdered, settotalItemsOrdered, applyCoupon } = useOrder();
   const [couponCode, setCouponCode] = useState("");
   const [open, setOpen] = useState(false);
   const [confirmedOrder, setConfirmedOrder] = useState<Order>(orderSummary);
