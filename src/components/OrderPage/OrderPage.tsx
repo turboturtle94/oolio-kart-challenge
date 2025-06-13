@@ -3,7 +3,6 @@ import api from "../../lib/axios";
 
 import OrderItem from "./OrderItem";
 import { OrderProvider } from "../../context/OrderContext";
-
 import type { Item } from "../../types/item";
 
 import {
@@ -36,28 +35,31 @@ const OrderPage: React.FC = () => {
     fetchItems();
   }, []);
 
+  if (loading) {
+    // 👇 Full screen skeleton
+    return (
+      <Box
+        sx={{
+          padding: "2rem",
+          height: "100vh",
+          backgroundColor: "#f7f2ee", // or match your Container background
+        }}
+      >
+        <Skeleton variant="text" width="30%" height={40} sx={{ mb: 2 }} />
+        <Skeleton variant="rectangular" width="100%" height="70vh" />
+      </Box>
+    );
+  }
+
   return (
     <OrderProvider>
       <Container>
         <ItemsDisplay>
           <ItemsHeader>Desserts</ItemsHeader>
           <ItemsGrid>
-            {loading
-              ? Array.from({ length: 6 }).map((_, index) => (
-                  <Box key={index}>
-                    <Skeleton
-                      variant="rectangular"
-                      width="100%"
-                      height={200}
-                      sx={{ borderRadius: 2 }}
-                    />
-                    <Skeleton variant="text" width="80%" />
-                    <Skeleton variant="text" width="60%" />
-                  </Box>
-                ))
-              : items.map((item: Item, index: number) => (
-                  <OrderItem item={item} key={`${item.name}${index}`} />
-                ))}
+            {items.map((item: Item, index: number) => (
+              <OrderItem item={item} key={`${item.name}${index}`} />
+            ))}
           </ItemsGrid>
         </ItemsDisplay>
         <OrderSummary items={items} />
