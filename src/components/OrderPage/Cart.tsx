@@ -95,7 +95,10 @@ const Cart = ({
             >
               <ItemQty>{getItemQuantity(product.id)}x</ItemQty>
               <ItemPrice>
-                @{product.price} ${product.price * getItemQuantity(product.id)}
+                <pre style={{ tabSize: 3 }}>
+                  @{product.price} $
+                  {product.price * getItemQuantity(product.id)}
+                </pre>
               </ItemPrice>
             </ItemNameGroup>
           </CartEntryDetail>
