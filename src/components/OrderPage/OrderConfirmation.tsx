@@ -38,7 +38,6 @@ const OrderConfirmation = ({
         <span>We hope you enjoy your food</span>
       </OrderConfirmationTitle>
       <OrderConfirmationCard>
-        Z{" "}
         {orderSummary.products.map((product, index) => (
           <CartEntryContainer key={index}>
             <ProductHeader>
