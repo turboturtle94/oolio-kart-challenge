@@ -36,13 +36,12 @@ const OrderPage: React.FC = () => {
   }, []);
 
   if (loading) {
-    // 👇 Full screen skeleton
     return (
       <Box
         sx={{
           padding: "2rem",
           height: "100vh",
-          backgroundColor: "#f7f2ee", // or match your Container background
+          backgroundColor: "#f7f2ee",
         }}
       >
         <Skeleton variant="text" width="30%" height={40} sx={{ mb: 2 }} />
