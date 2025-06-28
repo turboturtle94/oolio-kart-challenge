@@ -4,7 +4,7 @@ export const SummaryHeader = styled.h1`
   color: #bc7964;
   font-weight: 500;
   padding: 0.5rem;
-  @media (max-height: 896px) {
+  @media (max-height: 896px) and (max-width: 414px) {
     padding: 0;
     font-size: 1.5rem;
   }
@@ -63,7 +63,7 @@ export const CartTotalContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  @media (max-height: 896px) {
+  @media (max-height: 896px) and (max-width: 414px) {
     padding: 0;
   }
 `;
@@ -77,7 +77,7 @@ export const InfoContainer = styled.div`
   font-size: 0.75rem;
   font-weight: 600;
   gap: 0.5rem;
-  @media (max-height: 896px) {
+  @media (max-height: 896px) and (max-width: 414px) {
     display: none;
   }
 `;
@@ -90,14 +90,17 @@ export const ConfirmOrderButton = styled.button`
   border-radius: 1.5rem;
   border: none;
   cursor: pointer;
-  &:hover {
-    filter: brightness(0.9);
-  }
+
   &:focus-visible {
     outline: none;
   }
-  @media (max-height: 896px) {
+  @media (max-height: 896px) and (max-width: 414px) {
     height: 2rem;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      filter: brightness(0.9);
+    }
   }
 `;
 
@@ -107,7 +110,7 @@ export const CouponContainer = styled.div`
   width: 100%;
   justify: center;
   align-items: center;
-  @media (max-height: 896px) {
+  @media (max-height: 896px) and (max-width: 414px) {
     height: 1.5rem;
   }
 `;
@@ -123,7 +126,7 @@ export const CouponInput = styled.input`
     outline: none;
   }
   padding: 1rem;
-  @media (max-height: 896px) {
+  @media (max-height: 896px) and (max-width: 414px) {
     padding: 0.5rem;
     height: 1.5rem;
   }
@@ -138,15 +141,17 @@ export const CouponButton = styled.button`
   align-items: center;
   background-color: #c73b0d;
   border: none;
-  &:hover {
-    filter: brightness(0.9);
-  }
   &:focus-visible {
     outline: none;
   }
   img {
     width: 2rem;
     margin-top: 8px;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      filter: brightness(0.9);
+    }
   }
 `;
 

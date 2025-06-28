@@ -65,10 +65,6 @@ export const AddToCartButton = styled.button`
   top: 100%;
   transform: translate(-50%, -50%);
   cursor: pointer;
-  &:hover {
-    filter: brightness(0.9);
-    border: 1px solid #c73b0d;
-  }
   &:focus-visible {
     outline: none;
     border: 1px solid #c73b0d;
@@ -77,6 +73,12 @@ export const AddToCartButton = styled.button`
     width: 4rem;
     span {
       display: none;
+    }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      filter: brightness(0.9);
+      border: 1px solid #c73b0d;
     }
   }
 `;
@@ -125,9 +127,11 @@ export const IconButton = styled.button<IconButtonProps>`
   cursor: pointer;
   border-radius: 50%;
   &:focus-visible,
-  &:hover {
-    outline: none;
-    border: 2px solid ${({ $borderColor }) => $borderColor || "white"};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      outline: none;
+      border: 2px solid ${({ $borderColor }) => $borderColor || "white"};
+    }
   }
 `;
 
