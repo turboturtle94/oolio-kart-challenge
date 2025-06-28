@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Skeleton from "@mui/material/Skeleton";
 import { ItemImage } from "./styles/OrderItem.styles";
+import { SkeletonRect } from "./styles/Skeleton.styles";
 
 const ItemImageDisplay = ({
   src,
@@ -22,14 +22,7 @@ const ItemImageDisplay = ({
 
   return (
     <>
-      {!loaded && (
-        <Skeleton
-          variant="rectangular"
-          width="100%"
-          height="100%"
-          sx={{ borderRadius: "8px" }}
-        />
-      )}
+      {!loaded && <SkeletonRect height="100%" radius="8px" />}
       <ItemImage
         src={src.mobile}
         srcSet={srcSet}

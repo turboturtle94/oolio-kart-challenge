@@ -1,4 +1,5 @@
 import {
+  CartEntries,
   CartEntryContainer,
   CartEntryDetail,
   CartTotalContainer,
@@ -77,43 +78,45 @@ const Cart = ({
 
   return (
     <>
-      {orderSummary.products.map((product) => (
-        <CartEntryContainer key={product.id}>
-          <CartEntryDetail>
-            <ItemName>{product.name}</ItemName>
-            <ItemNameGroup
-              style={{
-                display: "flex",
-                gap: "1rem",
-                alignItems: "center",
+      <CartEntries>
+        {orderSummary.products.map((product) => (
+          <CartEntryContainer key={product.id}>
+            <CartEntryDetail>
+              <ItemName>{product.name}</ItemName>
+              <ItemNameGroup
+                style={{
+                  display: "flex",
+                  gap: "1rem",
+                  alignItems: "center",
+                }}
+              >
+                <ItemQty>{getItemQuantity(product.id)}x</ItemQty>
+                <ItemPrice>
+                  <pre style={{ tabSize: 3 }}>
+                    @{product.price} $
+                    {product.price * getItemQuantity(product.id)}
+                  </pre>
+                </ItemPrice>
+              </ItemNameGroup>
+            </CartEntryDetail>
+            <IconButton
+              $borderColor="#c73b0d"
+              onClick={() => {
+                removeItemsFromCart(product.id);
               }}
             >
-              <ItemQty>{getItemQuantity(product.id)}x</ItemQty>
-              <ItemPrice>
-                <pre style={{ tabSize: 3 }}>
-                  @{product.price} $
-                  {product.price * getItemQuantity(product.id)}
-                </pre>
-              </ItemPrice>
-            </ItemNameGroup>
-          </CartEntryDetail>
-          <IconButton
-            $borderColor="#c73b0d"
-            onClick={() => {
-              removeItemsFromCart(product.id);
-            }}
-          >
-            <ButtonIcon src={close} alt="Remove" />
-          </IconButton>
-        </CartEntryContainer>
-      ))}
+              <ButtonIcon src={close} alt="Remove" />
+            </IconButton>
+          </CartEntryContainer>
+        ))}
+      </CartEntries>
       <CartTotalContainer>
         <span
           style={{ fontSize: "0.75rem", color: "#b7adac", fontWeight: 400 }}
         >
           Order Total
         </span>
-        <span style={{ fontSize: "2rem", fontWeight: 500 }}>
+        <span style={{ fontSize: "1.5rem", fontWeight: 500 }}>
           ${orderSummary?.totalCost.toFixed(2) ?? "0.00"}
         </span>
       </CartTotalContainer>

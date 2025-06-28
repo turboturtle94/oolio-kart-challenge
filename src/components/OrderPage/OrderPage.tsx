@@ -12,9 +12,7 @@ import {
   ItemsHeader,
 } from "./styles/OrderPage.styles";
 import OrderSummary from "./OrderSummary";
-
-import Skeleton from "@mui/material/Skeleton";
-import Box from "@mui/material/Box";
+import LoadingComponent from "./LoadingComponent";
 
 const OrderPage: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
@@ -36,18 +34,7 @@ const OrderPage: React.FC = () => {
   }, []);
 
   if (loading) {
-    return (
-      <Box
-        sx={{
-          padding: "2rem",
-          height: "100vh",
-          backgroundColor: "#f7f2ee",
-        }}
-      >
-        <Skeleton variant="text" width="30%" height={40} sx={{ mb: 2 }} />
-        <Skeleton variant="rectangular" width="100%" height="70vh" />
-      </Box>
-    );
+    return <LoadingComponent></LoadingComponent>;
   }
 
   return (

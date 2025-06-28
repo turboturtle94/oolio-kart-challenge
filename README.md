@@ -1,7 +1,7 @@
 # Kart-challenge
 
 ## ✅ Legend  
-✅ — Feature Completed
+✅ — Feature `Completed`
 
 ---
 

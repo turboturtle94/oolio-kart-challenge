@@ -4,6 +4,10 @@ export const SummaryHeader = styled.h1`
   color: #bc7964;
   font-weight: 500;
   padding: 0.5rem;
+  @media (max-height: 896px) {
+    padding: 0;
+    font-size: 1.5rem;
+  }
 `;
 
 export const CartEntryContainer = styled.div`
@@ -12,6 +16,40 @@ export const CartEntryContainer = styled.div`
   border-bottom: 0.5px solid #f3f3f3;
   align-items: center;
   padding: 0.5rem;
+`;
+
+export const CartEntries = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-height: 15rem;
+  overflow-y: auto;
+
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #a8a8a8 transparent;
+
+  /* WebKit-based browsers */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #a8a8a8;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #888;
+  }
+  @media (max-width: 414px) {
+    max-height: 6rem;
+  }
 `;
 
 export const CartEntryDetail = styled.div`
@@ -25,6 +63,9 @@ export const CartTotalContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  @media (max-height: 896px) {
+    padding: 0;
+  }
 `;
 
 export const InfoContainer = styled.div`
@@ -36,6 +77,9 @@ export const InfoContainer = styled.div`
   font-size: 0.75rem;
   font-weight: 600;
   gap: 0.5rem;
+  @media (max-height: 896px) {
+    display: none;
+  }
 `;
 
 export const ConfirmOrderButton = styled.button`
@@ -52,6 +96,9 @@ export const ConfirmOrderButton = styled.button`
   &:focus-visible {
     outline: none;
   }
+  @media (max-height: 896px) {
+    height: 2rem;
+  }
 `;
 
 export const CouponContainer = styled.div`
@@ -60,6 +107,9 @@ export const CouponContainer = styled.div`
   width: 100%;
   justify: center;
   align-items: center;
+  @media (max-height: 896px) {
+    height: 1.5rem;
+  }
 `;
 
 export const CouponInput = styled.input`
@@ -73,6 +123,10 @@ export const CouponInput = styled.input`
     outline: none;
   }
   padding: 1rem;
+  @media (max-height: 896px) {
+    padding: 0.5rem;
+    height: 1.5rem;
+  }
 `;
 
 export const CouponButton = styled.button`
@@ -97,12 +151,17 @@ export const CouponButton = styled.button`
 `;
 
 export const OrderSummaryContainer = styled.div`
+  position: sticky;
+  left: calc(100vw - 30% - 1rem);
   display: flex;
   padding: 1rem;
   width: 30%;
   @media (max-width: 1024px) {
     width: 100%;
-    padding: 0.25rem;
+    padding: 0;
+    top: 0;
+    left: 0;
+    min-height: 30%;
   }
 `;
 
@@ -115,9 +174,15 @@ export const SummaryCard = styled.div`
   gap: 1rem;
   padding: 1.5rem;
   background-color: white;
-  @media (max-width: 768px) {
-    height: auto;
+  @media (max-width: 1024px) {
+    height: 100%;
   }
+`;
+
+export const CartContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-height:;
 `;
 
 export const ItemName = styled.div`
